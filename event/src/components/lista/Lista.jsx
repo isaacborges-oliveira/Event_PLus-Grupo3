@@ -65,7 +65,7 @@ const Listagem = (props) => {
                         ))
                     ) :
                         (
-                            <p className="pp">Nenhum Tipo de Evento Encontrado.</p>
+                            <p className="saguiv2">Nenhum Tipo de Evento Encontrado.</p>
                         )
                     }
                 </table>

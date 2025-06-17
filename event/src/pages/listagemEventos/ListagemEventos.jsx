@@ -30,11 +30,14 @@ const ListagemEventos = (props) => {
     async function listarEventos() {
         try {
             //pego o eventos em geral
-            const resposta = await api.get("eventos");
+            const resposta = await api.get("Eventos");
             const todosOsEventos = resposta.data;
+            // console.log(todosOsEventos);
+            
             const respostaPresencas = await api.get("PresencasEventos/ListarMinhas/" + usuario.idUsuario)
             const minhasPresencas = respostaPresencas.data;
-
+            // console.log(minhasPresencas);
+            
             const eventosComPresencas = todosOsEventos.map((atualEvento) => {
                 const presenca = minhasPresencas.find(p => p.idEvento === atualEvento.idEvento);
                 return {
@@ -46,7 +49,6 @@ const ListagemEventos = (props) => {
             })
 
             setListaEvento(eventosComPresencas)
-
 
         } catch (error) {
             console.error("Erro ao buscar eventos:", error);
@@ -73,17 +75,24 @@ const ListagemEventos = (props) => {
     }
 
     async function manipularPresenca(idEvento, presenca, idPresenca) {
-
+        console.log(idEvento, usuario.idUsuario);
+        
         try {
-            if (presenca && idPresenca != "") {
+            if (presenca && idPresenca != null) {
+                console.log("aq1");
+                
                 //atualizacao: situacao para FALSE
                 await api.put(`PresencasEventos/${idPresenca}`, { situacao: false });
                 Swal.fire('Removido!', 'Sua presenca foi removida.', 'success');
-            } else if (idPresenca != "") {
+            } else if (idPresenca != null) {
+                console.log("aq2");
+                
                 //atualizacao: situacao para TRUE
                 await api.put(`PresencasEventos/${idPresenca}`, { situacao: true });
                 Swal.fire('Confirmado!', 'Sua presenca foi confirmada.', 'success');
             } else {
+                console.log("aq3");
+                
                 //cadastrar uma nova presenca
                 await api.post("PresencasEventos", { situacao: true, idUsuario: usuario.idUsuario, idEvento: idEvento });
                 Swal.fire('Confirmado!', 'Sua presenca foi confirmada.', 'success');
@@ -92,7 +101,6 @@ const ListagemEventos = (props) => {
             listarEventos()
         } catch (error) {
             console.log(error);
-
         }
     }
 
@@ -125,9 +133,9 @@ const ListagemEventos = (props) => {
                         >
                             <option value="todos" selected>Todos os Eventos</option>
 
-                            <option value="futuros" selected>Somente Futuros</option>
+                            <option value="futuros">Somente Futuros</option>
 
-                            <option value="passados" selected>Somente Passados</option>
+                            <option value="passados">Somente Passados</option>
 
 
                         </select>
@@ -148,7 +156,7 @@ const ListagemEventos = (props) => {
                                 {listaEvento.length > 0 ? (
                                     filtrarEventos() && filtrarEventos().map((item) => (
 
-                                        <tr key={item.IdPresencaEvento} className="item_listaEventos">
+                                        <tr key={item.idEvento} className="item_listaEventos">
                                             <td data-cell="Nome">{item.nomeEvento}</td>
                                             <td data-cell="Data">{format(item.dataEvento, "dd/MM/yyyy")}</td>
                                             <td data-cell="Tipo Evento">{item.tiposEvento.tituloTipoEvento}</td>
@@ -166,7 +174,7 @@ const ListagemEventos = (props) => {
                                             </td>
 
                                             <td data-cell="botao"><Toggle presenca={item.possuiPresenca}
-                                                manipular={() => manipularPresenca(item.IdEvento, item.possuiPresenca, item.IdPresencaEvento)
+                                                manipular={() => manipularPresenca(item.idEvento, item.possuiPresenca, item.IdPresencaEvento)
                                                 } /></td>
                                         </tr>
                                     )

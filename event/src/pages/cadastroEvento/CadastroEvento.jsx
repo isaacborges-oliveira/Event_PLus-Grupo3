@@ -4,7 +4,7 @@ import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import Cadastro from "../../components/cadastro/Cadastro";
 import Listagem from "../../components/lista/Lista";
-import banner from "../../assets/img/cadastro.png"
+import banner from "../../assets/img/cadastroeventos.svg"
 
 
 import Swal from 'sweetalert2'

@@ -9,9 +9,19 @@ import Usuario from "../pages/criacaousuario/CriacaoUsuario";
 import { useAuth } from "../contexts/AuthContext";
 
 const Privado = (props) => {
- 
+    const { usuario } = useAuth();
+
+    if (!usuario) {
+        return <Navigate to="/" />
+    }
+
+    if (usuario.tipoUsuario !== props.tipoPermitido) {
+        return <Navigate to="/" />
+    }
+
     return <props.Item/>
 }
+
 
 const Rotas = () => {
     return (

@@ -4,11 +4,10 @@ import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import Cadastro from "../../components/cadastro/Cadastro";
 import Listagem from "../../components/lista/Lista";
-import banner from "../../assets/img/mulhermedia-removebg-preview.png";
+import banner from "../../assets/img/mulhermedia-removebg-preview (1).png";
 
 import Swal from 'sweetalert2'
 import api from "../../Services/services";
-
 
 
 const TipoUsuario = () => {
