@@ -1,0 +1,84 @@
+.main_login {
+    display: flex;
+    height: 100vh;
+    background-color: #0e2a48;
+}
+
+.banner {
+    flex: 1;
+    background-color: rgb(255, 255, 255);
+    /* modificações na imagem de fundo */
+
+    background-size: 600px;
+    background-position: center;
+   
+    background-repeat: no-repeat;
+    clip-path: polygon(0 0, 100% 0, 40% 400%, 0% 400%);
+}
+
+.section_login {
+    flex: 1;
+    display: flex;
+    background-color: #0e2a48;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.section_login img {
+    width: 330px;
+    
+}
+.login{
+
+    margin-top: 150px;
+}
+
+.form_login {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    background-color: #0e2a48;
+    width: 70%;
+    justify-content: space-around;
+}
+
+.campo_login {
+      margin-left: 200px;
+    width: 100%;
+}
+
+.campo_input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 17%;
+}
+
+.campo_input input {
+    width: 300px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 3px solid #d6dae6;
+    height: 25px;
+    background-color: #0e2a48;
+    color: #ffffff;
+    outline: none;
+}
+
+.link_senha a {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    color: #A6A0A0;
+}
+
+/* Responsividade */
+@media screen and (max-width: 768px) {
+    .banner {
+        display: none;
+    }
+}

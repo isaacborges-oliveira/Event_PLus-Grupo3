@@ -1,0 +1,113 @@
+.campo_cadNome input {
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    border-color: black;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    outline: none;
+}
+
+.campo_cadTipoEvento select {
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    border-color: black;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    outline: none;
+}
+
+
+
+.imagem_form {
+    display: flex;
+    padding: 40px;
+    gap: 190px;
+    margin-top: 30px;
+}
+
+.form_cadastro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.campo_cadastro {
+    display: flex;
+    gap: 35px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.campo_cadNome,
+.campo_cadTipoEvento {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.div_titulo h1 {
+    width: 100%;
+    height: 50px;
+    margin-top: 30px;
+    text-transform: uppercase;
+}
+
+.div_titulo hr {
+    color: #b51d44;
+    width: 100%;
+}
+
+.campo_Instituiçao select {
+    display: flex;
+    gap: 50px;
+    flex-direction: column;
+    align-items: center;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    border-color: black;
+    outline: none;
+}
+
+.div_descriçao input {
+    display: flex;
+    gap: 50px;
+    flex-direction: column;
+    align-items: center;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    border-color: black;
+    outline: none;
+}
+
+textarea{
+    border: 1px solid black;
+}
+
+.div_data input{
+    display: flex;
+    gap: 50px;
+    flex-direction: column;
+    align-items: center;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    border-color: black;
+    outline: none; 
+}
+
+@media screen and (max-width:768px) {
+    .img {
+        display: none;
+    }
+
+    .campo_cadastro {
+        align-items: center;
+        flex-direction: column;
+    }
+
+
+}
