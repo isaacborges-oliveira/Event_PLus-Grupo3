@@ -5,9 +5,27 @@ import Footer from "../../components/footer/Footer"
 import Banner from "../../assets/img/EventbannerAzul.png"
 import Mapa from "../../assets/img/Mapppsa.png"
 import Visao from "../../assets/img/VisaoAzull.png"
+import { useEffect, useState } from "react";
+import api from "../../services/Services";
 
 
-const Home = () => {
+const Home = (props) => {
+    const [listaEventos, setListaEventos] = useState([]);
+
+    async function listarEventos() {
+        try {
+            const resposta = await api.get("eventos");
+
+            setListaEventos(resposta.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        listarEventos();
+    }, [])
+
     return (
         <>
             <Header
@@ -18,44 +36,34 @@ const Home = () => {
                         <img src={Banner} alt="" />
                     </div>
 
-                    <div className="proximos_eventos">
+                    <div className="lista_eventos layout_grid">
                         <div className="titulo">
                             <h1>Próximos Eventos</h1>
-                    
+                            <hr />
                         </div>
 
-                        <div className="lista_eventos layout_grid">
-                            <div className="item">
-                                <h1>Titulo do Evento</h1>
+                        <div className="proximos_eventos">
+                            {listaEventos.length > 0 ? (
+                                listaEventos.map((item) => (
+                                    <article className="item">
+                                        <h1>{item.nomeEvento}</h1>
 
-                                <p>Breve descrição do evento, pode ser um paragrafo pequeno</p>
+                                        <p>{item.descricao}</p>
 
-                                <button>Conectar</button>
-                            </div>
+                                        <button>Conectar</button>
+                                    </article>
+                                ))
+                            ) :
+                                (
+                                    <article className="item">
+                                        <h1>Não á eventos</h1>
 
-                            <div className="item">
-                                <h1>Titulo do Evento</h1>
+                                        <p>Breve descrição do evento, pode ser um paragrafo pequeno</p>
 
-                                <p>Breve descrição do evento, pode ser um paragrafo pequeno</p>
-
-                                <button>Conectar</button>
-                            </div>
-
-                            <div className="item">
-                                <h1>Titulo do Evento</h1>
-
-                                <p>Breve descrição do evento, pode ser um paragrafo pequeno</p>
-
-                                <button>Conectar</button>
-                            </div>
-
-                            <div className="item">
-                                <h1>Titulo do Evento</h1>
-
-                                <p>Breve descrição do evento, pode ser um paragrafo pequeno</p>
-
-                                <button>Conectar</button>
-                            </div>
+                                        <button>Conectar</button>
+                                    </article>
+                                )
+                            }
                         </div>
                     </div>
 
@@ -71,7 +79,7 @@ const Home = () => {
 
                         <div className="mapa_informacoes layout_grid">
                             <div className="mapa">
-                                <img className="saguiv2"   src={Mapa} alt="" />
+                                <img src={Mapa} alt="" />
                             </div>
 
                             <div className="informacoes_contato">
@@ -82,7 +90,7 @@ const Home = () => {
                         </div>
                     </div>
                 </section>
-            </main>
+            </main >
             <Footer />
         </>
     )

@@ -38,7 +38,7 @@
   }
   
   input:checked + .slider {
-    background-color: #B51D44;
+    background-color: #201849;
   }
   
   input:focus + .slider {
@@ -59,4 +59,3 @@
   .slider.round:before {
     border-radius: 50%;
   }
-

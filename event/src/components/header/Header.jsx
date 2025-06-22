@@ -1,20 +1,14 @@
 import "./Header.css";
 import Logo from "../../assets/img/LogoNovaa.png";
-import { Link } from "react-router-dom"
-import Porta from "../../assets/img/icon.svg"
-import { useState } from "react";
+import Icone from "../../assets/img/Administracao.svg";
+
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 import Swal from "sweetalert2";
 import secureLocalStorage from "react-secure-storage";
 
 const Header = (props) => {
-const [menuAberto, setMenuAberto] = useState(false);
-
-    const toggleMenu = () => {
-        setMenuAberto(!menuAberto);
-    };
-
 
     function alertar(icone, mensagem) {
         const Toast = Swal.mixin({
@@ -53,7 +47,6 @@ const [menuAberto, setMenuAberto] = useState(false);
 
                 alertar("success", "Até Logo!");
 
-
                 navigate("/home")
             }
         }).catch(error => {
@@ -62,34 +55,30 @@ const [menuAberto, setMenuAberto] = useState(false);
         })
     }
 
-
     return (
         <header>
             <div className="layout_grid cabecalho">
-                <Link to="/">
-                    <img src={Logo} className="sagui" alt="Logo do Event Plus" />
+                <Link to="/" className="logo_header">
+                    <img src={Logo} alt="Logo do Events" />
                 </Link>
 
-                {/* Botão hambúrguer */}
-                <button className="hamburguer" onClick={toggleMenu}>
-                    ☰
-                </button>
-
-                <nav className={`nav_header ${menuAberto ? "ativo" : ""}`}>
-                    <Link className="link_header" to="/Home">Home</Link>
-                    <Link className="link_header" to="/TipoEvento">Eventos</Link>
-                    <Link className="link_header" to="/TipoUsuario">Usuarios</Link>
-                    <Link className="link_header" to="/Contatos" style={{ display: props.visivelHeader }}>Contatos</Link>
-                    <Link className="link_header" to="/Administrador">{props.adm}</Link>
+                <nav className="nav_header">
+                    <Link href="" className="link_header" to="/Home">Home</Link>
+                    <Link href="" className="link_header" to="/Evento">Eventos</Link>
+                    <Link href="" className="link_header" to="/TipoEvento">TpEvento</Link>
+                    <Link href="" className="link_header" to="/TipoUsuario">Usuários</Link>
+                    <Link href="" className="link_header" to="/Listagem">Listagem</Link>
                 </nav>
 
-                <Link onClick={() => realizarLogOut()}>
-                    <img src={Porta} alt="Imagem de porta" className="porta" />
-                </Link>
+                <nav className="nav_img" to="/" style={{ display: props.visibilidade }}>
+                    <Link href="" className="link_header" >Alunos</Link>
+                    <img src={Icone} onClick={() => realizarLogOut()} alt="Icone" style={{ display: props.visibilidade }} />
+                </nav>
 
-
+                <div className="login" style={{ display: props.botao_logar }}>
+                    <Link href="" to="/" className="logar">Logar</Link>
+                </div>
             </div>
-
         </header>
     )
 }

@@ -1,86 +1,107 @@
-/* footer{
-    position: fixed;
-} */
+.listagem_section {
+    padding: 40px 0;
+    height: 100%;
+}
 
-.listagemEventos {
-    /* height: 84vh; */
-    width: 100%;
+.titulo_listagem {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 40px 0;
-    color: black;
-    
+    margin-bottom: 40px;
 }
 
-.table_eventos img {
-    height: 20px;
+.titulo_listagem hr {
+    border: 1px solid #0e2a48;
+    width: 90px;
+    margin-top: 10px;
 }
 
-.tabela_eventos{
-    width: 80%;
-    margin-top: 40px;
-    text-align: center;
-    /* margin-left: -60px; */
-
-}
-
-
-.tabela_eventos .table_eventos :first-child {
-    width: 300px;
-    
-    
-}
-
-.tabela_eventos .table_eventos :nth-child(2) {
-    width: 760px;
-    text-align: center;
-    
-
-}
-
-
-.tabela_eventos .item_listaEventos :nth-child(2){
-    text-align: center;
-    
-}
-
-.tabela_eventos .table_eventos th {
-   
-    width: 200px;
-    padding: 5px 0;
-    
-}
-
-.item_listaEventos td {
-    padding: 28px 0 0 1px;
-    border-bottom: 1px solid black;
-}
-
-.select {
-    border: none;
+.listagem_eventos select {
+    margin-bottom: 50px;
+    width: 356px;
+    border-top: none;
     border-left: none;
     border-right: none;
-    border-top: none;
     outline: none;
-    padding: 0 5px;
-    width: 355px;
-    height: 30px;
-    margin-bottom: 60px;
-    color: black;
-    display: flex;
-    border-bottom: 1px solid #201849;
-    
 }
 
-h1{
-
-    text-transform: uppercase;
+.list table {
+    width: 100%;
+    padding: 0 20px;
 }
 
-.icon{
-border: none;
-border-left: none;
-border-right: none;
-background-color: transparent;
+/* .list table {
+    border-collapse: collapse;
+} */
+
+.list,
+table,
+th,
+td {
+    border-collapse: collapse;
+    padding-bottom: 10px;
+}
+
+.list,
+td,
+th,
+td {
+    /* text-align: start;   */
+    margin-top: 20px;
+}
+
+.list_presenca td {
+    height: 90px;
+    margin-bottom: 20px;
+    padding-top: 40px;
+}
+
+.list_presenca {
+    border: 1px solid #201849;
+    text-align: center;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+@media screen and (max-width: 768px) {
+
+    .list thead {
+        display: none;
+    }
+
+
+    .list td {
+        display: grid;
+        text-align: left;
+        padding: 10px 10px 10px 0;
+        grid-template-columns: 10ch auto;
+
+    }
+
+
+    .list td::before {
+        content: attr(data-cell) ":";
+        font-weight: 700;
+        width: 80px;
+        text-align: left;
+    }
+
+    .list td:last-child {
+        margin-bottom: 24px;
+    }
+
+    .list td:first-child {
+        margin-top: 24px;
+    }
+
+
+    .list img {
+        margin-left: 30px;
+    }
+
+    .list_tabela {
+        display: none;
+    }
+
 }

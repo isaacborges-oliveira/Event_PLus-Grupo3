@@ -1,18 +1,20 @@
-import { useEffect, useState } from "react";
-import imgDeletar from "../../assets/img/deletar.svg";
 import "./Modal.css"
 
-import Swal from 'sweetalert2'
+import React, { useEffect, useState } from 'react';
+import { useAuth } from "../../contexts/authContext";
 
-import api from "../../Services/services";
+import api from "../../services/Services";
+import Swal from "sweetalert2";
 
-import { useAuth } from "../../contexts/AuthContext";
+import imgDeletar from "../../assets/img/Deletar.svg"
 
 const Modal = (props) => {
+    const [comentarios, setComentarios] = useState([]);
+    const [novoComentario, setNovoComentario] = useState("");
+
+    const { usuario } = useAuth();
 
     function alertar(icone, mensagem) {
-        //------------ALERTA------------------
-
         const Toast = Swal.mixin({
             toast: true,
             position: "top-end",
@@ -28,71 +30,66 @@ const Modal = (props) => {
             icon: icone,
             title: mensagem
         });
-
-        //----------FIM DO ALERTA--------------
     }
-
-    const [comentarios, setComentarios] = useState([])
-    // const [usuarioId, setUsuarioId] = useState("B2381F43-9D74-400D-B3ED-FD05D20E9885")
-    const { usuario } = useAuth();
-    const [novoComentario, setNovoComentario] = useState("")
-
 
     async function listarComentarios() {
         try {
-            const resposta = await api.get(`ComentariosEventos/ListarSomenteExibe?id=${props.idEvento}`);
-            setComentarios(resposta.data)
-        } catch (error) {
+            const resposta = await api.get(`ComentariosEventos/ListarSomenteExibe?id=${props.idEvento}`)
 
+            setComentarios(resposta.data);
+        } catch (error) {
+            console.log(error);
         }
     }
 
     useEffect(() => {
-        listarComentarios()
-    }, [comentarios])
+        listarComentarios();
+    }, [])
 
     async function cadastrarComentario(comentario) {
-        try {
-            console.log(usuario.idUsuario)
-            console.log(props.idEvento)
-            console.log(comentario)
+        if (comentario.trim() !== "") {
+            let timerInterval;
             Swal.fire({
-                title: 'Enviando comentário...',
-                allowOutsideClick: false,
+                title: "Auto close alert!",
+                html: "I will close in <b></b> milliseconds.",
+                timer: 500,
+                timerProgressBar: true,
                 didOpen: () => {
                     Swal.showLoading();
+                    const timer = Swal.getPopup().querySelector("b");
+                    timerInterval = setInterval(() => {
+                        timer.textContent = `${Swal.getTimerLeft()}`;
+                    }, 100);
+                },
+                willClose: () => {
+                    clearInterval(timerInterval);
+                }
+            }).then(async (result) => {
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    try {
+                        console.log(usuario.idUsuario);
+                        console.log(props.idEvento);
+                        console.log(comentario);
+                        await api.post("ComentariosEventos", {
+                            idUsuario: usuario.idUsuario,
+                            idEvento: props.idEvento,
+                            descricao: comentario
+                        })
+
+                        alertar("success", "Cadastro realizado com sucesso");
+                    } catch (error) {
+                        console.log(error);
+                        alertar("error", "Erro! Entre em contato com o suporte!");
+                    }
                 }
             });
-
-            await api.post("ComentariosEventos", {
-
-                idUsuario: usuario.idUsuario,
-                idEvento: props.idEvento,
-                descricao: comentario
-            })
-
-            Swal.fire({
-                icon: 'success',
-                title: 'Comentário enviado com sucesso!'
-            });
-
-
-
-
-        } catch (error) {
-            // console.log(error.response.data);
-
-            alertar("error", error.response.data)
-            Swal.fire({
-                icon: 'error',
-                title: 'Erro ao enviar comentário',
-                text: 'Tente novamente mais tarde.'
-            });
+        } else {
+            alertar("warning", "Preencha o campo!");
         }
     }
 
-    async function deletarComentario(idComentario) {
-     Swal.fire({
+    function deletarComentario(idComentario) {
+        Swal.fire({
             title: 'Tem Certeza?',
             text: "Essa ação não poderá ser desfeita!",
             icon: 'warning',
@@ -115,6 +112,7 @@ const Modal = (props) => {
     return (
         <>
             <div className="model-overlay" onClick={props.fecharModal}>
+
                 <div className="model" onClick={(e) => e.stopPropagation()}>
                     <h1>{props.titulo}</h1>
                     <div className="model_conteudo">
@@ -125,33 +123,37 @@ const Modal = (props) => {
                                 {comentarios.map((item) => (
                                     <div key={item.idComentarioEvento}>
                                         <strong>{item.usuario.nomeUsuario}</strong>
-                                        <img src={imgDeletar} alt="deletar"
-                                            onClick={() => deletarComentario(item.idComentarioEvento)} />
+
+                                        <img
+                                            src={imgDeletar}
+                                            alt="Deletar"
+                                            onClick={() => deletarComentario(item.idComentarioEvento)}
+                                        />
+
                                         <p>{item.descricao}</p>
                                         <hr />
                                     </div>
                                 ))}
                                 <div>
                                     <input
-                                        type="text"
-                                        placeholder="Escreva seu comentario..."
+                                        type="text" placeholder="Escreva seu comentário..."
                                         value={novoComentario}
                                         onChange={(e) => setNovoComentario(e.target.value)}
                                     />
+
                                     <button
-                                        className="botao"
-                                        onClick={() => cadastrarComentario(novoComentario)}>
-                                        Cadastrar
+                                        onClick={() => cadastrarComentario(novoComentario)}
+                                        className="botao">
+                                        cadastrar
                                     </button>
-                                </div>
+                                </div  >
                             </>
                         )}
                     </div>
-                </div>
+                </div >
             </div>
-
         </>
     )
 }
 
-export default Modal;
+export default Modal
