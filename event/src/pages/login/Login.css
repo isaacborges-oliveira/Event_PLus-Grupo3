@@ -5,79 +5,81 @@
 }
 
 .banner {
-    
+    flex: 1;
+    background-color: rgb(255, 255, 255);
+    /* modificações na imagem de fundo */
 
-    width: 50%;
- background-color: rgb(236, 236, 236);
-    background-image: url("../../assets/img/azulNovoHomemA-removebg-preview.png");
+    background-size: 600px;
     background-position: center;
+
     background-repeat: no-repeat;
-      clip-path: polygon(0 0, 100% 0, 40% 400%, 0% 400%);
+    clip-path: polygon(0 0, 100% 0, 40% 400%, 0% 400%);
 }
 
 .section_login {
     flex: 1;
     display: flex;
+    background-color: #0e2a48;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
+.section_login img {
+    width: 330px;
+
+}
+
+.login {
+    margin-left: 35px;
+    margin-top: 150px;
+}
+
 .form_login {
-    color: black;
-
-    height: 50%;
-    width: 49%;
+    margin-top: 50px;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    background-color: #0e2a48;
+    /* width: 70%; */
     justify-content: space-around;
-    align-items: center;
-    flex-direction: column;
 }
 
-.form_login a {
-    text-decoration: none;
-    color:#A6A0A0;
-    font-size: 12px;
-}
-
-.campos_login {
+.campo_login {
+    margin-left: 200px;
     width: 100%;
-    margin-top: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
-
-
-
 
 .campo_input {
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    width: 100%;
-    color: aqua;
+    margin-bottom: 17%;
 }
 
 .campo_input input {
-    height: 28px;
-    padding: 0 10px;
-    background-color: #0e2a48;
+    width: 300px;
     border-top: none;
     border-left: none;
     border-right: none;
+    border-bottom: 3px solid #d6dae6;
+    height: 25px;
+    background-color: #0e2a48;
+    color: #ffffff;
     outline: none;
-    color:aliceblue ;
 }
 
-@media screen and (max-width: 768px) {
-    .banner{
-        display: none;  
-    }
+.link_senha a {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    color: #A6A0A0;
+}
 
-    .section_login img {
-        width: 247px;
-        height: 47px;
+/* Responsividade */
+@media screen and (max-width: 768px) {
+    .banner {
+        display: none;
     }
 }

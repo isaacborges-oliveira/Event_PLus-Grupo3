@@ -1,67 +1,47 @@
-header {
-    background-color: white;
-
-    height: 85px;
-    width: 100%;
-
-    /* Borda */
-    box-shadow: 1px 4px 4px 0px #00000045;
-    position: relative;
-}
-
 .cabecalho {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
 
+header{
     width: 100%;
-    height: 85px;
+    height: 60px;
+    box-shadow: 1px 4px 4px 0px #00000045;
+    position: relative;
+
 }
 
-
-.logo_header {
-    height: 50px;
-    width: 115px;
+.nav_header {
     display: flex;
-    align-self: center;
-}   
-
-.link_header {
-    font-size: 15px;
-    margin-right: 50px;
-    color: black;
-    text-decoration: none;
-}   
-
-
-
-.nav_img {
-    display: flex;
-    cursor: pointer;
-    flex-direction: row-reverse;
-}
-
-.nav_img Link {
-    margin-right: 80px;
-}
-
-.login {
-    background-color: #0e2a48;
-    width: 115px;
-    height: 45px;
-    border-radius: 5px;
-    padding: 5px;
-
-    display: flex;
-    justify-content: center;
     align-items: center;
 }
-
-.logar {
-    text-decoration: none;
-    color: white;
+.sagui{
+    height: 56px;
 }
 
-@media screen and (max-width: 768px){
-    
+.link_header {
+    margin-left: 45px;
+    color: black;
+    text-decoration: none;
+}
+
+.porta {
+    width: 30px;
+    cursor: pointer;
+}
+
+.hamburguer{
+    border: none;
+    background: transparent;
+}
+
+@media screen and (max-width: 768px) {
+    header {
+        width: 100%;
+    }
+
+    .nav_header {
+        display: none;
+    }
 }
